@@ -1,0 +1,85 @@
+\documentclass[
+  11pt,
+  a4paper,
+  oneside,
+  abstracton,     % Abstract Überschriften
+  english        % Translator
+]{scrartcl}
+
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{sidecap}
+\usepackage{amssymb}
+\usepackage[xetex]{graphicx}
+\usepackage{fontspec,xunicode}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+\setmainfont{Calluna}
+\setsansfont[Scale=1.05]{Source Sans Pro}
+\setmonofont{Source Code Pro}
+\usepackage{xltxtra}
+
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage[english]{babel}
+\usepackage[babel,english=british]{csquotes}
+
+<% if(bibtex) { %>
+\usepackage[sorting=nyt,style=authoryear,dashed=false,firstinits=true,terseinits=false]{biblatex}
+\DeclareNameAlias{sortname}{last-first}
+\bibliography{references}
+<% } %>
+
+% Footnotes
+\usepackage[perpage, hang, multiple, stable]{footmisc}
+
+\PassOptionsToPackage{hyphens}{url}
+% PDF Settings
+\usepackage[%
+  pdftitle={<%= document.title %>},
+  pdfauthor={<%= document.author %>},
+  pdfcreator={pdflatex, LaTeX with KOMA-Script},
+  pdfpagemode=UseOutlines,
+  pdfdisplaydoctitle=true,
+  pdflang=eng,
+  unicode=true
+]{hyperref}
+
+\input{_common.tex}
+
+\title{<%= document.title %>}
+\subtitle{<%= document.subtitle %>}
+\author{<%= document.author %>}
+\date{<%= document.date %>}
+
+<% if(preamble) { %>
+  \input{<%= preamble %>}
+<% } %>
+
+\begin{document}
+
+<% if(titlePage) { %>
+  \input{<%= titlePage %>}
+<% } else { %>
+  \maketitle
+<% } %>
+
+<% if(abstract) { %>
+  \begin{abstract}
+    \input{abstract.tex}
+  \end{abstract}
+<% } %>
+
+<% _.forEach(files, function(filename) { %>
+\input{<%- filename %>}
+<% }); %>
+
+<% if(bibtex) { %>
+\printbibliography
+<% } %>
+
+\end{document}

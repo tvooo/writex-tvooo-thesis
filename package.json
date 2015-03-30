@@ -1,0 +1,22 @@
+{
+  "name": "writex-tvooo-article",
+  "version": "1.0.0",
+  "description": "A book/thesis template for WriTeX using Calluna and Source Sans Pro typefaces",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tvooo/writex-tvooo-thesis.git"
+  },
+  "keywords": [
+    "writex",
+    "writex-template",
+    "latex",
+    "markdown"
+  ],
+  "author": "Tim von Oldenburg <tim@tvooo.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tvooo/writex-tvooo-thesis/issues"
+  },
+  "homepage": "https://github.com/tvooo/writex-tvooo-thesis"
+}
