@@ -4,7 +4,7 @@
   oneside,
   abstracton,     % Abstract Überschriften
   english        % Translator
-]{scrartcl}
+]{scrbook}
 
 \usepackage{ucs}
 \usepackage{amsmath}
@@ -37,6 +37,14 @@
 % Footnotes
 \usepackage[perpage, hang, multiple, stable]{footmisc}
 
+% Glossary
+\usepackage[
+  nonumberlist, %keine Seitenzahlen anzeigen
+  acronym, %ein Abkürzungsverzeichnis erstellen
+  %section, %im Inhaltsverzeichnis auf section-Ebene erscheinen
+  toc, %Einträge im Inhaltsverzeichnis
+]{glossaries}
+
 \PassOptionsToPackage{hyphens}{url}
 % PDF Settings
 \usepackage[%
@@ -68,11 +76,33 @@
   \maketitle
 <% } %>
 
+<% if(glossary) { %>
+  \makeglossaries
+  \input{glossary.tex}
+<% } %>
+
 <% if(abstract) { %>
   \begin{abstract}
+ \thispagestyle{empty}
     \input{abstract.tex}
   \end{abstract}
 <% } %>
+
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{1}
+\printglossary[type=\acronymtype] % prints just the list of acronyms
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\makeatletter
+\renewcommand{\@pnumwidth}{2.25em}
+\renewcommand{\@tocrmarg}{2.25em}
+\makeatother
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
 
 <% _.forEach(files, function(filename) { %>
 \input{<%- filename %>}
